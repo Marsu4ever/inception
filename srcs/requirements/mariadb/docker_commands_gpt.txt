@@ -1,0 +1,26 @@
+ontainer Management
+docker run <image> – Runs a container from an image.
+docker ps – Lists running containers.
+docker ps -a – Lists all containers (including stopped ones).
+docker stop <container_id> – Stops a running container.
+docker start <container_id> – Starts a stopped container.
+docker restart <container_id> – Restarts a container.
+docker rm <container_id> – Removes a stopped container.
+
+Image Management
+docker images – Lists available images.
+docker pull <image> – Downloads an image from Docker Hub.
+docker rmi <image> – Removes an image.
+
+Container Interaction
+docker exec -it <container_id> bash – Opens a shell inside a running container.
+docker logs <container_id> – Shows logs of a container.
+
+Dockerfile & Build
+docker build -t <image_name> . – Builds an image from a Dockerfile.
+docker history <image> – Shows the layers of an image.
+
+Volumes & Networks
+docker volume ls – Lists volumes.
+docker network ls – Lists networks.
+

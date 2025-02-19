@@ -1,0 +1,91 @@
+ld -t my-image .
+
+-t = name
+
+docker images
+-lists all available Docker images on your local machine
+
+docker ps
+-list of containers
+-ps = process status
+
+/var/lib/docker/
+-images are stored here
+
+/var/lib is a directory on Linux systems that stores variable state data
+
+
+
+docker inspect my-image
+-find details on your image
+(returns a JSON)
+
+mysqld is the MySQL (or MariaDB) database server daemon
+
+delete docker image
+docker rmi command followed by the image ID or image name
+docker rmi 30359123b8ab
+
+docker rmi my-image:latest
+rmi = remove image
+
+
+docker rm <container_id>: Remove the stopped container.
+docker rmi <image_id>: Remove the image.
+docker rmi -f <image_id>: Force-remove the image and its dependent containers.
+
+
+docker run -it <image_name> /bin/sh
+
+
+/etc
+-contains system-wide configuration files
+-In Docker images, /etc contains default configurations which can be modified during container runtime.
+
+Deletes dangling images 
+docker images -q --filter "dangling=true" | xargs docker rmi -f
+dangling image =  is an image that has no name or tag (<none>)
+
+
+Removes ALL images
+docker rmi -f $(docker images -q)
+
+Outputs docker image IDs (and only that)
+docker images -q
+
+/var directory (short for variable) in Linux/Unix systems stores files that are expected to change frequently during system operation.
+
+/var/lib: Variable data files for software, such as databases.
+
+-p alsa creates parent directories if they don't exist
+mkdir -p /run/mysqld
+
+List all stopped containers
+docker ps -a
+
+Delete all stopped containers
+docker container prune
+
+Delete all stopped containers WITHOUT confirming
+docker container prune -f
+
+Stop container
+docker stop <container_id_or_name>
+
+Delete container
+docker rm <container_id_or_name>
+
+Force stop and delete container
+docker rm -f 7c5d31dd7edb
+
+Restarts container again
+docker restart <container_id_or_name>
+
+
+docker exec -it <container_id_or_name> mysql -u root
+
+
+SHOW DATABASES;
+SELECT CURRENT_USER();
+SHOW STATUS;
+
