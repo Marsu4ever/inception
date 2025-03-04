@@ -1,0 +1,7 @@
+[mysqld]				#applies settings to database server, hence the MariaDB server daemon
+datadir = /var/lib/mysql		#dir where MariaDB data is stored
+basedir = /usr				#dir where MariaDB is installed
+socket  = /run/mysqld/mysqld.sock
+bind_address= *
+port = 3306
+user = mysql				#user that MariaDB runs on

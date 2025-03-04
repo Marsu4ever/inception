@@ -1,0 +1,66 @@
+
+volumes:
+    mariadb:
+         name: mariadb
+         driver: local
+         driver_opts:
+           type: none
+           o: bind
+           device: /home/mkorpela/data/mariadb
+
+    wordpress:
+        name: wordpress
+        driver: local
+        driver_opts:
+          type: none
+          o: bind
+          device: /home/mkorpela/data/wordpress
+
+networks:
+    internal_network:
+        name: korpnet
+        driver: bridge
+
+services:
+    mariadb:
+        container_name: mariadb
+        build: ./requirements/mariadb
+        image: mariadb:10.11.11
+        restart: always
+        env_file: .env
+        ports: 
+            - "3306:3306"
+        volumes:
+            - mariadb:/var/lib/mysql
+        networks:
+            - internal_network
+
+
+    wordpress:
+        container_name: wordpress
+        build: ./requirements/wordpress
+        image: wordpress:6.7.2
+        restart: always
+        env_file: .env
+        networks:
+          - internal_network
+        volumes:
+          - wordpress:/var/www/html
+        depends_on:
+          - mariadb
+
+    nginx:
+        container_name: nginx
+        build: ./requirements/nginx
+        image: nginx:1.26.2
+        restart: always
+        env_file: .env
+        depends_on:
+          - wordpress
+        networks:
+          - internal_network
+        ports:
+          - "443:443"
+        volumes:
+          - wordpress:/var/www/html
+
